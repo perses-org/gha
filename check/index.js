@@ -6,15 +6,15 @@ const yaml = require('js-yaml');
 
 var rootPath=path.normalize(__dirname+'/../..');;
 
-var configFileName = rootPath+"/.perses-full.yml";
-var config = {};
+var configFileName = rootPath+"/.tests.yml";
+var tests = {};
 
-var resultFileName = rootPath+"/.perses-result.json";
+var resultFileName = rootPath+"/.resultsObservedPerformance1.json";
 var result = {};
 
 console.log("Loading Perses Config ("+configFileName+").");
 try {
-    config = yaml.safeLoad(fs.readFileSync(configFileName, 'utf8'));
+  tests = yaml.safeLoad(fs.readFileSync(configFileName, 'utf8'));
 
 } catch (e) {
   console.error(e);
@@ -30,9 +30,29 @@ try {
   process.exit(1);
 }
 
-if (result.mean > config.max_avg){
-  console.error("TEST FAILED: result > max --> "+result.mean+ ">"+config.max_avg);
-  process.exit(1);
-}else{
-  console.log("TEST PASSED: result < max --> "+result.mean+ " > "+config.max_avg);
-}
+
+tests.forEach(function(value){
+  if(value.type==="apipecker"){
+    resultFileName = rootPath+"/.results"+(value.id).replace(/\s/g, '')+".json"
+    try {
+      result = JSON.parse(fs.readFileSync(resultFileName, 'utf8'));
+      
+      if (result.mean > value.expect.mean.under){
+        console.error("TEST FAILED: result > max --> "+result.mean+ ">"+value.expect.mean.under);
+        process.exit(1);
+      }else{
+        console.log("TEST PASSED: result < max --> "+result.mean+ " > "+value.expect.mean.under);
+      }
+      
+
+  
+    } catch (e) {
+      console.error(e);
+    }
+
+  }
+    
+});
+
+
+
