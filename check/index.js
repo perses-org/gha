@@ -6,10 +6,10 @@ const yaml = require('js-yaml');
 
 var rootPath=path.normalize(__dirname+'/../..');;
 
-var configFileName = rootPath+"/.tests.yml";
+var configFileName = rootPath+"/.perses-tests.yml";
 var tests = {};
 
-var resultFileName = rootPath+"/.resultsObservedPerformance1.json";
+var resultFileName;
 var result = {};
 
 console.log("Loading Perses Config ("+configFileName+").");
