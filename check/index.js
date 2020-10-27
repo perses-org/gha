@@ -11,7 +11,7 @@ var resultFileName;
 var result = {};
 
 
-var configFileName = "perses-tests.yml";
+var configFileName = "perses-tests.yaml";
 var tests = {};
 
 console.log("Loading Perses Tests ("+configFileName+").");
