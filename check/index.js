@@ -11,10 +11,10 @@ var resultFileName;
 var result = {};
 
 
-var configFileName = ".perses-tests.yml";
+var configFileName = "perses-tests.yml";
 var tests = {};
 
-console.log("Loading Perses Config ("+configFileName+").");
+console.log("Loading Perses Tests ("+configFileName+").");
 try {
   tests = yaml.safeLoad(fs.readFileSync(configFileName, 'utf8'));
 
