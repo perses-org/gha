@@ -6,11 +6,13 @@ const yaml = require('js-yaml');
 
 var rootPath=path.normalize(__dirname+'/../..');;
 
-var configFileName = rootPath+"/.perses-tests.yml";
-var tests = {};
 
 var resultFileName;
 var result = {};
+
+
+var configFileName = ".perses-tests.yml";
+var tests = {};
 
 console.log("Loading Perses Config ("+configFileName+").");
 try {
@@ -21,14 +23,14 @@ try {
   process.exit(1);
 }
 
-console.log("Loading Perses Results ("+resultFileName+").");
-try {
-    result = JSON.parse(fs.readFileSync(resultFileName, 'utf8'));
+// console.log("Loading Perses Results ("+resultFileName+").");
+// try {
+//     result = JSON.parse(fs.readFileSync(resultFileName, 'utf8'));
 
-} catch (e) {
-  console.error(e);
-  process.exit(1);
-}
+// } catch (e) {
+//   console.error(e);
+//   process.exit(1);
+// }
 
 
 tests.forEach(function(value){
