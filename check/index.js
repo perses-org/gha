@@ -35,7 +35,7 @@ try {
 
 tests.forEach(function(value){
   if(value.type==="apipecker"){
-    resultFileName = "/logs/results"+(value.id).replace(/\s/g, '')+".json"
+    resultFileName = ".logs/results"+(value.id).replace(/\s/g, '')+".json"
     try {
       result = JSON.parse(fs.readFileSync(resultFileName, 'utf8'));
       
