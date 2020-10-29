@@ -35,7 +35,7 @@ try {
 
 tests.forEach(function(value){
   if(value.type==="apipecker"){
-    resultFileName = rootPath+"/logs/results"+(value.id).replace(/\s/g, '')+".json"
+    resultFileName = "/logs/results"+(value.id).replace(/\s/g, '')+".json"
     try {
       result = JSON.parse(fs.readFileSync(resultFileName, 'utf8'));
       
@@ -44,9 +44,7 @@ tests.forEach(function(value){
         process.exit(1);
       }else{
         console.log("TEST PASSED: result < max --> "+result.mean+ " > "+value.expect.mean.under);
-      }
-      
-
+      }    
   
     } catch (e) {
       console.error(e);
