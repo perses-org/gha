@@ -36,7 +36,7 @@ try {
 
 tests.forEach(function(value){
   if(value.type==="apipecker"){
-    console.log("Checking performance tests...")
+    console.log(">>>> Checking performance tests...")
     resultFileName = "./logs/results"+(value.id).replace(/\s/g, '')+".json"
     try {
       result = JSON.parse(fs.readFileSync(resultFileName, 'utf8'));
@@ -65,12 +65,12 @@ tests.forEach(function(value){
 
 
 function checkUIResults(){
-  console.log("Checking espresso tests...")
+  
   fs.readdir(path.join('./logs/devices-logs/espresso/'), function(err, filenames) {
     if (err) {
       return console.log(err);
     }
-    
+    console.log(">>>> Checking espresso tests...")
     console.log("-------------")
     files=filenames.length
     
