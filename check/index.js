@@ -55,7 +55,7 @@ tests.forEach(function(value){
 
   }
   if(value.type==="espresso"){
-    console.log("Checking espresso tests...")
+    
     checkUIResults()
   
   }
@@ -64,13 +64,16 @@ tests.forEach(function(value){
 });
 
 
-async function checkUIResults(){
+function checkUIResults(){
+  console.log("Checking espresso tests...")
   fs.readdir(path.join('./logs/devices-logs/espresso/'), function(err, filenames) {
     if (err) {
       return console.log(err);
     }
     
+    console.log("-------------")
     files=filenames.length
+    
     filenames.forEach(function(filename) {
 
       file=fs.readFileSync('./logs/devices-logs/espresso/' + filename, 'utf-8');
