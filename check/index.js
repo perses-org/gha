@@ -36,7 +36,17 @@ try {
 
 tests.forEach(function(value){
   if(value.type==="apipecker"){
-    console.log(">>>> Checking performance tests...")
+    checkPerformanceResults(value)
+  }
+  if(value.type==="espresso"){
+    checkUIResults()
+  }
+
+    
+});
+
+function checkPerformanceResults(value){
+  console.log(">>>> Checking Performance tests...")
     resultFileName = "./logs/results"+(value.id).replace(/\s/g, '')+".json"
     try {
       result = JSON.parse(fs.readFileSync(resultFileName, 'utf8'));
@@ -52,16 +62,7 @@ tests.forEach(function(value){
       console.error(e);
       process.exit(1);
     }
-
-  }
-  if(value.type==="espresso"){
-    
-    checkUIResults()
-  
-  }
-
-    
-});
+}
 
 
 function checkUIResults(){
@@ -70,7 +71,7 @@ function checkUIResults(){
     if (err) {
       return console.log(err);
     }
-    console.log(">>>> Checking espresso tests...")
+    console.log(">>>> Checking Espresso tests...")
     console.log("-------------")
     files=filenames.length
     
