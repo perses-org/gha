@@ -105,7 +105,12 @@ function checkUIResults(){
       console.error("FAILURE: Espresso tests have not been passed!");
       process.exit(1);
     }else{
-      console.log("SUCCESS: Espresso tests have been passed correctly!")
+      if(files > 0)
+        console.log("SUCCESS: Espresso tests have been passed correctly!")
+      else{
+        console.error("FAILURE: No results have been obtained from the devices!");
+        process.exit(1);
+      }
     }
   });
 }
