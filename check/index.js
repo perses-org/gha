@@ -55,7 +55,7 @@ function checkPerformanceResults(value){
         console.error(value.id +": FAILED: result > max --> "+result.mean+ ">"+value.expect.mean.under);
         process.exit(1);
       }else{
-        console.log(value.id +": PASSED: result < max --> "+result.mean+ " > "+value.expect.mean.under);
+        console.log(value.id +": PASSED: result < max --> "+result.mean+ " < "+value.expect.mean.under);
       }    
   
     } catch (e) {
