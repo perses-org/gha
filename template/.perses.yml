@@ -19,33 +19,55 @@ ec2_username: "ubuntu"
 #AWS Region.
 region: "eu-west-1"
 
-#Volume size (in GB). 10GB + 3GB * number_devices
-volume_size: "20"
-
-
 
 ######### Environment Configuration #########
 
-#Numbers of Android devices to deploy
-number_devices: "2"
+#### Set of devices ####
 
-#Maximum CPU: maximum amount of available CPU resources each device can use 
-#(We recommend a minimum of 1.5)
-cpu_devices: "1.5"
+  # Id: Name of set of devices
 
-#Maximum RAM:  maximum amount of memory each device can use 
-#(We recommend a minimum of 3g '3GB').
-ram_devices: "3g"
+  # Type: mobile
 
-#Android version to use (6 to 10).
-android_version: "9"
+  # Devices: numbers of Android devices to deploy
+
+  # #Android version: You can select 6 to 11.
+
+  # CPU:  maximum amount of available CPU resources each device can use 
+  # #(We recommend a minimum of 1.5)
+
+  # RAM:  maximum amount of memory each device can use 
+  # #(We recommend a minimum of 3g '3GB').
+
+devices:
+  - id: "Basic Devices"
+    type: "mobile"
+    devices: 2
+    android_version: 9
+    hardware:
+      cpu: "1.5"
+      ram: "3g"
+  - id: "Medium Devices"
+    type: "mobile"
+    devices: 2
+    android_version: 10
+    hardware:
+      cpu: "2"
+      ram: "4g"
 
 #Application Id of Android App (can find it in the 'build.graddle' file of the application).
 application_id: "com.spilab.heatmapv3"
 
 #Time to wait for the deployment of Android devices (1m '1 minute', 1h '1 hour')
-#For example, for deploy 50 devices, wait 20m '20 minutes'
-time_wait: "2m"
+#For example, EC2 - C5.metal:
+  # - 3 min for 2 devices
+  # - 3 min for 4 devices
+  # - 4 min for 8 devices
+  # - 6 min for 16 devices
+  # - 9 min for 32 devices
+  # - 18 min for 50 devices
+  # - 25 min for 60 devices (max devices)
+
+time_wait: "3m"
 
 ######### Logs Configuration #########
 
@@ -56,20 +78,22 @@ log_tags:
 ######### Tests Configuration #########
 
 ## EXAMPLES
-# tests:
-#   - id: "test1"
-#     concurrentUsers: 3
-#     iterations: 5
-#     delay: 500
-#     url: "http://108.129.48.139/mqtt/mc/heatmaps?beginDate=2019-06-10T08:00:28Z&endDate=2019-06-10T20:56:28Z&latitude=37.378833&longitude=-5.970739&radius=600&devices=2&timeout=2500"
-#   - id: "test2"
-#     concurrentUsers: 3
-#     iterations: 5
-#     delay: 500
-#     url: "http://108.129.48.139/mqtt/mc/heatmaps?beginDate=2019-06-10T08:00:28Z&endDate=2019-06-10T20:56:28Z&latitude=37.378833&longitude=-5.970739&radius=600&devices=2&timeout=2500"
-
-
-#max_avg: 20000
+tests:
+ - id: "Observed Performnance1"
+   type: "apipecker"
+   config:
+     concurrentUsers: 3
+     iterations: 5
+     delay: 500
+     url: "http://108.129.48.139/mqtt/mc/heatmaps?beginDate=2019-06-10T08:00:28Z&endDate=2019-06-10T20:56:28Z&latitude=37.378833&longitude=-5.970739&radius=600&devices=2&timeout=2500"
+   expect:
+     mean:
+        under: 2000
+ - id: "GUI Performance"
+   type: "espresso"      
+   expect:
+     total_execution:
+        under: 200
 
 ######### Custom Tests Location #########
 # custom_test: test/perses
