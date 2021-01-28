@@ -10,12 +10,6 @@ author: ""
 #Instance AWS type: Only compatible with machines that support kvm virtualization -> https://help.ubuntu.com/community/KVM/Installation.
 instance_type: "c5.metal"
 
-#AMI ID: We recommend Ubuntu "ami-035966e8adab4aaad".
-ami_id: ami-035966e8adab4aaad
-
-#EC2 Username: User name to log in to EC2 by SSH (with the previously recommended ami is "ubuntu").
-ec2_username: "ubuntu"
-
 #AWS Region.
 region: "eu-west-1"
 
@@ -25,18 +19,13 @@ region: "eu-west-1"
 #### Set of devices ####
 
   # Id: Name of set of devices
-
   # Type: mobile
-
   # Devices: numbers of Android devices to deploy
-
-  # #Android version: You can select 6 to 11.
-
+  # Android version: You can select 6 to 11.
   # CPU:  maximum amount of available CPU resources each device can use 
-  # #(We recommend a minimum of 1.5)
-
+    #(We recommend a minimum of 1.5)
   # RAM:  maximum amount of memory each device can use 
-  # #(We recommend a minimum of 3g '3GB').
+    #(We recommend a minimum of 3g '3GB').
 
 devices:
   - id: "Basic Devices"
@@ -70,7 +59,7 @@ application_id: "com.spilab.heatmapv3"
 time_wait: "3m"
 
 ######### Logs Configuration #########
-
+#Labels/Tags to filter virtual devices logs
 log_tags: 
   - "HeatmapLog"
 
@@ -90,10 +79,7 @@ tests:
      mean:
         under: 2000
  - id: "GUI Performance"
-   type: "espresso"      
-   expect:
-     total_execution:
-        under: 200
+   type: "espresso"  
 
 ######### Custom Tests Location #########
 # custom_test: test/perses
