@@ -3,20 +3,24 @@
 #Author: Name of the operator. Used as a prefix to avoid name collision on.
 author: ""
 
-
-
-######### EC2 Configuration #########
-
-#Instance AWS type: Only compatible with machines that support kvm virtualization -> https://help.ubuntu.com/community/KVM/Installation.
-instance_type: "c5.metal"
+######### Scenario Configuration #########
 
 #AWS Region.
 region: "eu-west-1"
 
+#Instance AWS type: Only compatible with machines that support kvm virtualization -> https://help.ubuntu.com/community/KVM/Installation.
+instance_type: "c5.metal"
 
-######### Environment Configuration #########
+#Amazon Machine Image ID - We have to select a Ubuntu image
+ami_id: "ami-0dc8d444ee2a42d8a"
 
-#### Set of devices ####
+######### Application Id #########
+  #Application Id of Android App (can find it in the 'build.graddle' file of the application).
+application_id: "com.spilab.heatmapv3"
+
+
+
+######### Set of devices #########
 
   # Id: Name of set of devices
   # Type: mobile
@@ -43,9 +47,9 @@ devices:
       cpu: "2"
       ram: "4g"
 
-#Application Id of Android App (can find it in the 'build.graddle' file of the application).
-application_id: "com.spilab.heatmapv3"
 
+
+######### Time to wait #########
 #Time to wait for the deployment of Android devices (1m '1 minute', 1h '1 hour')
 #For example, EC2 - C5.metal:
   # - 3 min for 2 devices
@@ -57,12 +61,6 @@ application_id: "com.spilab.heatmapv3"
   # - 25 min for 60 devices (max devices)
 
 time_wait: "3m"
-
-######### Logs Configuration #########
-#Labels/Tags to filter virtual devices logs
-log_tags: 
-  - "HeatmapLog"
-
 
 ######### Tests Configuration #########
 
@@ -81,8 +79,7 @@ tests:
  - id: "GUI Performance"
    type: "espresso"  
 
-######### Custom Tests Location #########
-# custom_test: test/perses
-
-######### Custom Tests Configuration #########
-# max_avg_devices: 4000
+######### Logs Configuration #########
+#Labels/Tags to filter virtual devices logs
+log_tags: 
+  - "HeatmapLog"
